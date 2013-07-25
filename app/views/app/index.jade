@@ -1,6 +1,6 @@
-#home.page
+#homePage.page
   div
-    button#capture.btn.btn-large.btn-success
+    button#capture.btn.btn-large.btn-success(data-page="#capturePage")
       i.icon-camera.icon-white
       span Lets capture
     span.divider
@@ -8,7 +8,7 @@
       i.icon-upload.icon-white
       span Upoad
 
-#capture.page.hidden
+#capturePage.page
   article
     input(type='file', accept='image/*;capture=camera')
     section
