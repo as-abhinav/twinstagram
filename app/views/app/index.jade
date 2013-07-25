@@ -1,0 +1,28 @@
+#home.page
+  div
+    button#capture.btn.btn-large.btn-success
+      i.icon-camera.icon-white
+      span Lets capture
+    span.divider
+    button#upload.btn.btn-large.btn-success
+      i.icon-upload.icon-white
+      span Upoad
+
+#capture.page.hidden
+  article
+    input(type='file', accept='image/*;capture=camera')
+    section
+      video#video(width='320', height='200', autoplay='autoplay')
+    section.btn-box
+      button#btnClick.btn Click Me!
+    section
+      canvas#canvas(width='320', height='240')
+    section#filterBtns.btn-box
+      button.btn(data-filter-type='bnw') B&W
+      button.btn(data-filter-type='brightness') Bright
+      button.btn(data-filter-type='darkness') Dark
+      button.btn(data-filter-type='sepia') Sepia
+      button.btn(data-filter-type='threshold') Threshold
+      button.btn(data-filter-type='invert') Invert
+    section.btn-box
+      button#save.btn Save

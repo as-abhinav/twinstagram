@@ -10,4 +10,6 @@ module.exports = function (compound) {
         app.enable('force assets compilation');
         app.use(require('express').errorHandler({ dumpExceptions: true, showStack: true }));
     });
+
+    app.set('view engine', 'jade');
 };
