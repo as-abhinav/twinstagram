@@ -2,8 +2,12 @@
 <html lang="en">
   <head>
     <title><%= title %></title>
-    <%- stylesheetLinkTag('bootstrap', 'application', 'app','bootstrap-responsive') %>
-    <%- javascriptIncludeTag('zepto.min', 'application', 'base64', 'canvas2image', 'webcam') %>
+    <%- stylesheetLinkTag('normalize', 'foundation.min', 'app') %>
+    <script>
+      document.write('<script src=' + ('__proto__' in {} ? '/javascripts/vendor/zepto.min' : '/javascripts/vendor/jquery') + '.js><\/script>')
+    </script>
+    <%- javascriptIncludeTag('vendor/custom.modernizr', 'vendor/foundation.min', 'application', 'libs/base64', 'libs/canvas2image', 'webcam') %>
+    <%- javascriptIncludeTag('webcam', 'application') %>
     <%- csrfMetaTag() %>
     <meta charset="utf8">
     <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
@@ -42,6 +46,7 @@
 
     </div>
   </body>
+  
 </html>
 
 <%- contentFor('javascripts') %>
