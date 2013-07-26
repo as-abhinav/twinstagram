@@ -1,16 +1,16 @@
 #homePage.page
   div
-    button#capture.btn.btn-large.btn-success(data-page="#capturePage")
+    a#capture.pageChanger.button.large.success.round(data-page="#capturePage")
       i.icon-camera.icon-white
       span Lets capture
     span.divider
-    button#upload.btn.btn-large.btn-success
+    a#upload.pageChanger.button.large.success.round(data-page="#uploadPage")
       i.icon-upload.icon-white
       span Upoad
 
 #capturePage.page
   article
-    input(type='file', accept='image/*;capture=camera')
+    
     section
       video#video(width='320', height='200', autoplay='autoplay')
     section.btn-box
@@ -26,3 +26,10 @@
       button.btn(data-filter-type='invert') Invert
     section.btn-box
       button#save.btn Save
+
+#uploadPage.page
+  div
+    .fileUploadContainer
+      a.chooseFile.button.small.round(href="#") Choose...
+      input(type='file', accept='image/*;capture=camera')
+
