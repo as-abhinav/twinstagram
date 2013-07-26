@@ -1,4 +1,4 @@
-twinstagram
+![TWINSTagram](https://raw.github.com/as-abhinav/twinstagram/master/public/images/logo.png)
 ===========
 
-TW Instagram in a Day
+A small Project for Canvas and HTML5 work (dummy)
