@@ -8,9 +8,10 @@ A small Project for Canvas and HTML5 work (dummy)
 
 
 
-Libraries & Frameworks Used :
-1. Foundation: http://foundation.zurb.com/
-2. Zepto: http://zeptojs.com/
-3. History.js https://github.com/browserstate/history.js/
-4. Base64: 
-5. Canvas2Image:
+## Libraries & Frameworks Used
+
+* Foundation: http://foundation.zurb.com/
+* Zepto: http://zeptojs.com/
+* History.js https://github.com/browserstate/history.js/
+* Base64: 
+* Canvas2Image:
