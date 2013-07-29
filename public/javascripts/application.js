@@ -4,20 +4,37 @@
   App = App || {};
 
   App.loader = function(page) {
-    $(".page").hide();
-    return $("#" + page).show();
+    var toPage;
+    toPage = page;
+    return History.pushState({
+      page: toPage
+    }, null, toPage.replace("#", ""));
   };
 
   App.pageChanger = function() {
-    var showPage;
-    showPage = $($(this).data('page'));
+    var toPage;
+    toPage = $(this).data('page');
+    return History.pushState({
+      page: toPage
+    }, null, toPage.replace("#", ""));
+  };
+
+  App.stateChange = function(e) {
+    return App.getPage(History.getState());
+  };
+
+  App.getPage = function(state) {
+    var showPage, toPage;
+    toPage = state.data.page;
+    showPage = $(toPage);
     showPage.parent().find(".page").hide();
     return showPage.show();
   };
 
   $(function() {
     $("body").on("click", ".pageChanger", App.pageChanger);
-    return App.loader("homePage");
+    History.Adapter.bind(window, 'popstate', App.stateChange);
+    return App.loader("#homePage");
   });
 
 }).call(this);
