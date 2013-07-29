@@ -1,6 +1,6 @@
 exports.routes = function (map) {
-    map.resources('posts');
     map.root('app#index');
+    map.get('*', 'app#index', {as: 'homePage'});
 
     // Generic routes. Add all your routes below this line
     // feel free to remove generic routes
