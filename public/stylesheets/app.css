@@ -23,10 +23,10 @@ article section {
   float: left;
   width: 340px;}
 article section.btn-box {
-  width: 100px;}
+  width: 150px;}
 article section.btn-box button {
   display: block;
-  width: 90%;
+  width: 120px;
   text-align: center;
   background: none;
   border: solid 1px rgb(204, 204, 204);
@@ -82,3 +82,12 @@ footer {
   width: 90px;
   height: 32px;
   margin: 0;}
+
+#capturePage #filterBtns  .btn {
+  width: 120px;
+  height: 50px;
+  transition: width .6s, height .6s;}
+#capturePage #filterBtns  .btn:hover {
+  z-index: 2;
+  width: 220px;
+  height: 100px;}

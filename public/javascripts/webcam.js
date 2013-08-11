@@ -1,6 +1,26 @@
 (function() {
   $(function() {
-    var applyFilter, brightness, getImage, grayscale, invert, onError, onSuccess, processImage, sepia, threshold;
+    var applyFilter, brightness, canvas, canvasThumbs, context, contextThumbs, createButtons, getImage, grayscale, invert, onError, onSuccess, paintCanvas, processImage, sepia, threshold;
+    canvas = $("#canvas").get(0);
+    context = canvas.getContext("2d");
+    canvasThumbs = $("#canvasThumbs").get(0);
+    contextThumbs = canvasThumbs.getContext("2d");
+    createButtons = function() {
+      var imageData;
+      $("#filterBtns.btn-box button").each(function() {
+        var filterType, imageData, url;
+        filterType = $(this).data("filter-type");
+        imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        imageData = applyFilter(filterType, imageData);
+        contextThumbs.putImageData(imageData, -50, -50);
+        url = "url('" + canvasThumbs.toDataURL("image/png") + "')";
+        return $(this).css({
+          "background": url
+        });
+      });
+      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      return contextThumbs.putImageData(imageData, 0, 0);
+    };
     onError = function(err) {
       return console.log("The following error occured: " + err);
     };
@@ -12,23 +32,25 @@
       return video.src = url.createObjectURL(localMediaStream);
     };
     getImage = function() {
-      var canvas, ch, context, cw, v;
+      var ch, cw, v;
       v = $("#video").get(0);
-      canvas = $("#canvas").get(0);
-      context = canvas.getContext("2d");
       cw = Math.floor(canvas.clientWidth);
       ch = Math.floor(canvas.clientHeight);
       canvas.width = cw;
       canvas.height = ch;
-      return context.drawImage(v, 0, 0, cw, ch);
+      context.drawImage(v, 0, 0, cw, ch);
+      context.save();
+      contextThumbs.drawImage(v, 0, 0, cw, ch);
+      return createButtons();
     };
     processImage = function() {
-      var canvas, context, filterType, imageData;
+      var filterType, imageData;
       filterType = $(this).data("filter-type");
-      canvas = $("#canvas").get(0);
-      context = canvas.getContext("2d");
       imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      return context.putImageData(applyFilter(filterType, imageData), 0, 0);
+      return paintCanvas(applyFilter(filterType, imageData));
+    };
+    paintCanvas = function(imageData) {
+      return context.putImageData(imageData, 0, 0);
     };
     applyFilter = function(filterType, imageData) {
       switch (filterType) {
@@ -127,7 +149,15 @@
       video: true,
       audio: true
     }, onSuccess, onError);
-    $("#btnClick").on("click", getImage);
+    $("#restore").on("click", function(e) {
+      var imageData;
+      imageData = contextThumbs.getImageData(0, 0, canvasThumbs.width, canvasThumbs.height);
+      return context.putImageData(imageData, 0, 0);
+    });
+    $("#btnClick").on("click", function(e) {
+      e.preventDefault();
+      return getImage();
+    });
     $("#filterBtns button").on("click", processImage);
     return $("#save").on("click", function() {
       return Canvas2Image.saveAsPNG($("#canvas").get(0));

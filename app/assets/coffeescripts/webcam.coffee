@@ -1,4 +1,27 @@
+
 $ ->
+
+  canvas = $("#canvas").get(0)
+  context = canvas.getContext("2d")
+
+  canvasThumbs = $("#canvasThumbs").get(0)
+  contextThumbs = canvasThumbs.getContext("2d")
+
+  createButtons= ->
+    $("#filterBtns.btn-box button").each(->
+      filterType = $(this).data("filter-type")
+
+      imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+      imageData = applyFilter(filterType, imageData)
+      contextThumbs.putImageData imageData, -50, -50
+
+      url = "url('" + canvasThumbs.toDataURL("image/png") + "')"
+      $(this).css({"background": url})
+    )
+    imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+    contextThumbs.putImageData imageData, 0, 0
+
+  
   onError = (err) ->
     console.log "The following error occured: " + err
 
@@ -10,20 +33,22 @@ $ ->
 
   getImage = ->
     v = $("#video").get(0)
-    canvas = $("#canvas").get(0)
-    context = canvas.getContext("2d")
     cw = Math.floor(canvas.clientWidth)
     ch = Math.floor(canvas.clientHeight)
     canvas.width = cw
     canvas.height = ch
     context.drawImage v, 0, 0, cw, ch
+    context.save()
+    contextThumbs.drawImage v, 0, 0, cw, ch
+    createButtons()
 
   processImage = ->
     filterType = $(this).data("filter-type")
-    canvas = $("#canvas").get(0)
-    context = canvas.getContext("2d")
     imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-    context.putImageData applyFilter(filterType, imageData), 0, 0
+    paintCanvas applyFilter(filterType, imageData)
+  
+  paintCanvas = (imageData)->
+    context.putImageData imageData, 0, 0
 
   applyFilter = (filterType, imageData) ->
     switch filterType
@@ -108,12 +133,23 @@ $ ->
     pixels
 
   navigator.getMedia = (navigator.getUserMedia or navigator.webkitGetUserMedia or navigator.mozGetUserMedia or navigator.msGetUserMedia)
+  
   navigator.getMedia
     video: true
     audio: true
   , onSuccess, onError
-  $("#btnClick").on "click", getImage
+
+  $("#restore").on "click", (e)->
+    imageData = contextThumbs.getImageData(0, 0, canvasThumbs.width, canvasThumbs.height)
+    context.putImageData imageData, 0, 0
+    
+
+  $("#btnClick").on "click", (e)-> 
+    e.preventDefault()
+    getImage()
+
   $("#filterBtns button").on "click", processImage
+
   $("#save").on "click", ->
     Canvas2Image.saveAsPNG $("#canvas").get(0)
 
