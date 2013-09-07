@@ -23,8 +23,10 @@
 
 var Post = describe('Post', function () {
     property('title', String);
-    property('content', String);
-    property('published', Boolean);
-    set('restPath', pathTo.posts);
+    property('image', String);
+   	property('published_on', Date);
+   	property('postedBy', String);
+   	property('geoLocation', String);
+   	set('restPath', pathTo.posts);
 });
 

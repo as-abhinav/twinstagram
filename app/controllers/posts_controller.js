@@ -4,12 +4,6 @@ before(loadPost, {
     only: ['show', 'edit', 'update', 'destroy']
     });
 
-action('new', function () {
-    this.title = 'New post';
-    this.post = new Post;
-    render();
-});
-
 action(function create() {
     Post.create(req.body.Post, function (err, post) {
         respondTo(function (format) {
