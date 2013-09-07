@@ -83,11 +83,5 @@ footer {
   height: 32px;
   margin: 0;}
 
-#capturePage #filterBtns  .btn {
-  width: 120px;
-  height: 50px;
-  transition: width .6s, height .6s;}
-#capturePage #filterBtns  .btn:hover {
-  z-index: 2;
-  width: 220px;
-  height: 100px;}
+#capturePage #canvasThumbs {
+  display: none;}

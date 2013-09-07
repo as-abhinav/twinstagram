@@ -7,11 +7,18 @@ $ ->
   canvasThumbs = $("#canvasThumbs").get(0)
   contextThumbs = canvasThumbs.getContext("2d")
 
+  canvasButton = $("#canvasButton").get(0)
+  contextButton = canvasButton.getContext("2d")
+
   createButtons= ->
+    imageData = null
+
+    contextButton.drawImage($("#TWISTALogo").get(0),10,10)
+
     $("#filterBtns.btn-box button").each(->
       filterType = $(this).data("filter-type")
 
-      imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+      imageData = context.getImageData(0, 0, canvasButton.width, canvasButton.height)
       imageData = applyFilter(filterType, imageData)
       contextThumbs.putImageData imageData, -50, -50
 
