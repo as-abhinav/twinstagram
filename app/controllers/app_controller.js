@@ -9,3 +9,8 @@ action(function index() {
     render();
 });
 
+action(function lists(){
+	this.title = "Lists";
+	render();
+});
+
