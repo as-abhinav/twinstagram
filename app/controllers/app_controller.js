@@ -13,4 +13,3 @@ action(function lists(){
 	this.title = "Lists";
 	render();
 });
-

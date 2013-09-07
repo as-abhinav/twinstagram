@@ -9,28 +9,20 @@ body {
   padding: 0 !important;
   overflow: auto;}
 
-.container .page {
-  padding: 0 10px;}
+.container {
+  min-height: 480px;}
 
+header nav.top-bar {
+  margin-bottom: 0;}
+header nav.top-bar .name h1 a {
+  width: 80%;}
 header .logo {
   height: 20px;
   border: none ;}
 
-article {
-  margin: auto;
-  margin-top: 20px;}
-article section {
+section {
   float: left;
   width: 340px;}
-article section.btn-box {
-  width: 150px;}
-article section.btn-box button {
-  display: block;
-  width: 120px;
-  text-align: center;
-  background: none;
-  border: solid 1px rgb(204, 204, 204);
-  margin: 5px;}
 
 footer {
   bottom: 0;
@@ -43,15 +35,29 @@ footer {
   font-size: 10px;
   margin-top: 35px;}
 
-#homePage div {
+.fileUploadContainer {
+  height: 65px;
+  width: 180px;
+  position: relative;
+  margin: 0 auto;}
+.fileUploadContainer input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 180px;
+  height: 65px;
+  margin: 0;}
+
+#homePage > div {
   text-align: center;
   padding-top: 100px;}
-#homePage div button {
+#homePage > div button {
   display: block;
   margin: 0 auto;}
-#homePage div button i {
+#homePage > div button i {
   margin-right: 10px;}
-#homePage div .divider {
+#homePage > div .divider {
   padding: 50px 0;
   display: block;
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ4JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjY1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ5JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjY0Ii8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk5JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -61,27 +67,65 @@ footer {
   background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.65) 48%,rgba(255,255,255,0.64) 49%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%);
   width: 1px;
   margin: 10px auto;}
-#homePage div .divider:after {
+#homePage > div .divider:after {
   display: block;
   content: " or ";
   margin-left: -8px;
   background: rgb(19, 19, 19);}
 
-#uploadPage .fileUploadContainer {
-  height: 35px;
-  overflow: hidden;
-  position: relative;
+#capturePage canvas {
   margin: 0 auto;
-  width: 100px;
-  margin-bottom: 30px;}
-#uploadPage .fileUploadContainer input[type=file] {
+  width: 400px;}
+#capturePage video  {
+  margin: 0 auto;}
+#capturePage section.capture {
+  width: 100%;
+  position: relative;}
+#capturePage section.capture #btnCapture {
+  display: block;
+  text-indent: -4000px;
+  margin-bottom: 5px;
   position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 90px;
-  height: 32px;
-  margin: 0;}
+  left: 40%;
+  background: url("/images/logo.png") no-repeat center center;
+  background-size: contain;
+  width: 100px;
+  height: 50px;}
 
-#capturePage #canvasThumbs {
-  display: none;}
+#capturePage  #btnUpload {
+  display: block;
+  text-indent: -4000px;
+  margin-bottom: 5px;
+  position: relative;
+  left: 40%;
+  background: url("/images/logo.png") no-repeat center center;
+  background-size: contain;
+  width: 100px;
+  height: 50px;}
+
+#capturePage section.filer-buttons {
+  background-color: #000;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;}
+#capturePage section.filer-buttons ul {
+  padding: 5px;}
+#capturePage section.filer-buttons li {
+  float: left;
+  margin-right: 4px;}
+#capturePage section.filer-buttons a  {
+  display: block;
+  text-indent: -200px;
+  overflow: hidden;
+  min-height: 40px;
+  min-width: 70px;
+  border-radius: 5px;}
+#capturePage section.filer-buttons a.bnw {
+  background: url(/images/filter-bnw.png) no-repeat;}
+#capturePage section.filer-buttons a.bright {
+  background: url(/images/filter-bright.png) no-repeat;}
+#capturePage section.filer-buttons a.dark {
+  background: url(/images/filter-dark.png) no-repeat;}
+#capturePage section.filer-buttons a.sepia {
+  background: url(/images/filter-sepia.png) no-repeat;}

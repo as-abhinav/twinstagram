@@ -1,61 +1,45 @@
 
 $ ->
+  $canvas = $("#canvas")
+  $video = $("#video")
+  $btnCapture =  $("#btnCapture")
+  $btnUpload =  $("#btnUpload")
+  $context = $canvas.get(0).getContext("2d")
+  $filterSection = $("section.filer-buttons")
 
-  canvas = $("#canvas").get(0)
-  context = canvas.getContext("2d")
+  $btnCapture.hide()
+  $filterSection.hide()
 
-  canvasThumbs = $("#canvasThumbs").get(0)
-  contextThumbs = canvasThumbs.getContext("2d")
-
-  canvasButton = $("#canvasButton").get(0)
-  contextButton = canvasButton.getContext("2d")
-
-  createButtons= ->
-    imageData = null
-
-    contextButton.drawImage($("#TWISTALogo").get(0),10,10)
-
-    $("#filterBtns.btn-box button").each(->
-      filterType = $(this).data("filter-type")
-
-      imageData = context.getImageData(0, 0, canvasButton.width, canvasButton.height)
-      imageData = applyFilter(filterType, imageData)
-      contextThumbs.putImageData imageData, -50, -50
-
-      url = "url('" + canvasThumbs.toDataURL("image/png") + "')"
-      $(this).css({"background": url})
-    )
-    imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-    contextThumbs.putImageData imageData, 0, 0
-
-  
   onError = (err) ->
     console.log "The following error occured: " + err
 
   onSuccess = (localMediaStream) ->
-    video = $("#video").get(0)
-    video.autoplay = true
+    $video.attr("autoplay", "true")
     url = (if navigator.mozGetUserMedia then window.URL else window.webkitURL)
-    video.src = url.createObjectURL(localMediaStream)
+    $video.attr("src", url.createObjectURL(localMediaStream))
+    $btnCapture.show()
+
+
+  showCanvas = ->
+    $canvas.show()
+    $filterSection.show()
+
+    $btnCapture.hide()
+    $video.hide()
 
   getImage = ->
-    v = $("#video").get(0)
-    cw = Math.floor(canvas.clientWidth)
-    ch = Math.floor(canvas.clientHeight)
-    canvas.width = cw
-    canvas.height = ch
-    context.drawImage v, 0, 0, cw, ch
-    context.save()
-    contextThumbs.drawImage v, 0, 0, cw, ch
-    createButtons()
+    $canvas.show()
+    $context.drawImage $video.get(0), 0, 0, $canvas.width(), $canvas.height()
+    $context.save()
+    showCanvas()
 
   processImage = ->
     filterType = $(this).data("filter-type")
-    imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+    imageData = $context.getImageData(0, 0, canvas.width, canvas.height)
     paintCanvas applyFilter(filterType, imageData)
   
   paintCanvas = (imageData)->
-    context.putImageData imageData, 0, 0
+    $context.putImageData imageData, 0, 0
 
   applyFilter = (filterType, imageData) ->
     switch filterType
@@ -146,17 +130,17 @@ $ ->
     audio: true
   , onSuccess, onError
 
-  $("#restore").on "click", (e)->
-    imageData = contextThumbs.getImageData(0, 0, canvasThumbs.width, canvasThumbs.height)
-    context.putImageData imageData, 0, 0
+  # $("#restore").on "click", (e)->
+  #   imageData = contextThumbs.getImageData(0, 0, canvasThumbs.width, canvasThumbs.height)
+  #   context.putImageData imageData, 0, 0
     
 
-  $("#btnClick").on "click", (e)-> 
+  $btnCapture.on "click", (e)-> 
     e.preventDefault()
     getImage()
 
   $("#filterBtns button").on "click", processImage
 
-  $("#save").on "click", ->
-    Canvas2Image.saveAsPNG $("#canvas").get(0)
+  # $("#save").on "click", ->
+  #   Canvas2Image.saveAsPNG $("#canvas").get(0)
 

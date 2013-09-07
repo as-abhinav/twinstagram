@@ -10,29 +10,20 @@ body
   :overflow auto
 
 .container
-  .page
-    :padding 0 10px
+  :min-height 480px
 
 header
+  nav.top-bar
+    :margin-bottom 0
+    .name h1 a
+      :width 80%
   .logo
     :height 20px
     :border none 
 
-article
-  :margin auto
-  :margin-top 20px
-  section
-    :float left
-    :width 340px
-  section.btn-box
-    :width 150px
-    button
-      :display block
-      :width 120px
-      :text-align center
-      :background none
-      :border solid 1px rgb(204, 204, 204)
-      :margin 5px
+section
+  :float left
+  :width 340px
 
 footer
   :bottom 0
@@ -45,9 +36,22 @@ footer
   :font-size 10px
   :margin-top 35px
 
+.fileUploadContainer
+  :height 65px
+  :width 180px
+  :position relative
+  :margin 0 auto
+  input[type=file]
+    :position absolute
+    :top 0
+    :left 0
+    :opacity 0
+    :width 180px
+    :height 65px
+    :margin 0
 
 #homePage
-  div
+  > div
     :text-align center
     :padding-top 100px
     button
@@ -71,26 +75,64 @@ footer
         :margin-left -8px
         :background rgb(19, 19, 19)
 
-
-#uploadPage
-  .fileUploadContainer
-    :height 35px
-    :overflow hidden
-    :position relative
+#capturePage
+  canvas
     :margin 0 auto
-    :width 100px
-    :margin-bottom 30px
-    input[type=file]
+    :width 400px
+  video 
+    :margin 0 auto
+  section.capture
+    :width 100%
+    :position relative
+    #btnCapture
+      :display block
+      :text-indent -4000px
+      :margin-bottom 5px
       :position absolute
-      :top 0
-      :left 0
-      :opacity 0
-      :width 90px
-      :height 32px
-      :margin 0
+      :left 40%
+      :background url("/images/logo.png") no-repeat center center
+      :background-size contain
+      :width 100px
+      :height 50px
+
+#capturePage 
+  #btnUpload
+    :display block
+    :text-indent -4000px
+    :margin-bottom 5px
+    :position relative
+    :left 40%
+    :background url("/images/logo.png") no-repeat center center
+    :background-size contain
+    :width 100px
+    :height 50px
 
 #capturePage
-  #canvasThumbs
-    :display none
+  section.filer-buttons
+    :background-color #000
+    :bottom 0px
+    :left 0px
+    :right 0px
+    :width 100%
+    ul
+      :padding 5px
+    li
+      :float left
+      :margin-right 4px
+    a 
+      :display block
+      :text-indent -200px
+      :overflow hidden
+      :min-height 40px
+      :min-width 70px
+      :border-radius 5px
+    a.bnw
+      :background url(/images/filter-bnw.png) no-repeat
+    a.bright
+      :background url(/images/filter-bright.png) no-repeat
+    a.dark
+      :background url(/images/filter-dark.png) no-repeat
+    a.sepia
+      :background url(/images/filter-sepia.png) no-repeat
 
-
+  

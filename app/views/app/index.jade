@@ -1,38 +1,12 @@
 #homePage.page
   div
-    a#capture.pageChanger.button.large.success.round(data-page="#capturePage")
+    a#capture.pageChanger.button.large.success.round(href="app/capture")
       i.icon-camera.icon-white
       span Lets capture
     span.divider
-    a#upload.pageChanger.button.large.success.round(data-page="#uploadPage")
-      i.icon-upload.icon-white
-      span Upoad
-
-#capturePage.page
-  article
-    
-    section
-      video#video(width='320', height='200', autoplay='autoplay')
-    section.btn-box
-      button#btnClick.btn Click Me!
-    section
-      canvas#canvas(width='320', height='240')
-      canvas#canvasThumbs(width='320', height='240')
-      canvas#canvasButton(width='150', height='60')
-    section#filterBtns.btn-box
-      button.btn(data-filter-type='bnw') B&W
-      button.btn(data-filter-type='brightness') Bright
-      button.btn(data-filter-type='darkness') Dark
-      button.btn(data-filter-type='sepia') Sepia
-      button.btn(data-filter-type='threshold') Threshold
-      button.btn(data-filter-type='invert') Invert
-    section.btn-box
-      button#save.btn Save
-      button#restore.btn Restore
-
-#uploadPage.page
-  div
     .fileUploadContainer
-      a.chooseFile.button.small.round(href="#") Choose...
+      a#upload.pageChanger.button.large.success.round.chooseFile(href="#") 
+        i.icon-upload.icon-white
+        span Choose...
       input(type='file', accept='image/*;capture=camera')
 

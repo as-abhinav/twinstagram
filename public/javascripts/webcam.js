@@ -1,60 +1,44 @@
 (function() {
   $(function() {
-    var applyFilter, brightness, canvas, canvasButton, canvasThumbs, context, contextButton, contextThumbs, createButtons, getImage, grayscale, invert, onError, onSuccess, paintCanvas, processImage, sepia, threshold;
-    canvas = $("#canvas").get(0);
-    context = canvas.getContext("2d");
-    canvasThumbs = $("#canvasThumbs").get(0);
-    contextThumbs = canvasThumbs.getContext("2d");
-    canvasButton = $("#canvasButton").get(0);
-    contextButton = canvasButton.getContext("2d");
-    createButtons = function() {
-      var imageData;
-      imageData = null;
-      contextButton.drawImage($("#TWISTALogo").get(0), 10, 10);
-      $("#filterBtns.btn-box button").each(function() {
-        var filterType, url;
-        filterType = $(this).data("filter-type");
-        imageData = context.getImageData(0, 0, canvasButton.width, canvasButton.height);
-        imageData = applyFilter(filterType, imageData);
-        contextThumbs.putImageData(imageData, -50, -50);
-        url = "url('" + canvasThumbs.toDataURL("image/png") + "')";
-        return $(this).css({
-          "background": url
-        });
-      });
-      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      return contextThumbs.putImageData(imageData, 0, 0);
-    };
+    var $btnCapture, $btnUpload, $canvas, $context, $filterSection, $video, applyFilter, brightness, getImage, grayscale, invert, onError, onSuccess, paintCanvas, processImage, sepia, showCanvas, threshold;
+    $canvas = $("#canvas");
+    $video = $("#video");
+    $btnCapture = $("#btnCapture");
+    $btnUpload = $("#btnUpload");
+    $context = $canvas.get(0).getContext("2d");
+    $filterSection = $("section.filer-buttons");
+    $btnCapture.hide();
+    $filterSection.hide();
     onError = function(err) {
       return console.log("The following error occured: " + err);
     };
     onSuccess = function(localMediaStream) {
-      var url, video;
-      video = $("#video").get(0);
-      video.autoplay = true;
+      var url;
+      $video.attr("autoplay", "true");
       url = (navigator.mozGetUserMedia ? window.URL : window.webkitURL);
-      return video.src = url.createObjectURL(localMediaStream);
+      $video.attr("src", url.createObjectURL(localMediaStream));
+      return $btnCapture.show();
+    };
+    showCanvas = function() {
+      $canvas.show();
+      $filterSection.show();
+      $btnCapture.hide();
+      return $video.hide();
     };
     getImage = function() {
-      var ch, cw, v;
-      v = $("#video").get(0);
-      cw = Math.floor(canvas.clientWidth);
-      ch = Math.floor(canvas.clientHeight);
-      canvas.width = cw;
-      canvas.height = ch;
-      context.drawImage(v, 0, 0, cw, ch);
-      context.save();
-      contextThumbs.drawImage(v, 0, 0, cw, ch);
-      return createButtons();
+      $canvas.show();
+      $context.drawImage($video.get(0), 0, 0, $canvas.width(), $canvas.height());
+      $context.save();
+      return showCanvas();
     };
     processImage = function() {
       var filterType, imageData;
       filterType = $(this).data("filter-type");
-      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      imageData = $context.getImageData(0, 0, canvas.width, canvas.height);
       return paintCanvas(applyFilter(filterType, imageData));
     };
     paintCanvas = function(imageData) {
-      return context.putImageData(imageData, 0, 0);
+      return $context.putImageData(imageData, 0, 0);
     };
     applyFilter = function(filterType, imageData) {
       switch (filterType) {
@@ -153,19 +137,11 @@
       video: true,
       audio: true
     }, onSuccess, onError);
-    $("#restore").on("click", function(e) {
-      var imageData;
-      imageData = contextThumbs.getImageData(0, 0, canvasThumbs.width, canvasThumbs.height);
-      return context.putImageData(imageData, 0, 0);
-    });
-    $("#btnClick").on("click", function(e) {
+    $btnCapture.on("click", function(e) {
       e.preventDefault();
       return getImage();
     });
-    $("#filterBtns button").on("click", processImage);
-    return $("#save").on("click", function() {
-      return Canvas2Image.saveAsPNG($("#canvas").get(0));
-    });
+    return $("#filterBtns button").on("click", processImage);
   });
 
 }).call(this);
