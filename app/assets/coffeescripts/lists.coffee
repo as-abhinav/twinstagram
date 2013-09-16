@@ -1,6 +1,6 @@
 $ ->
 	show = (item) ->
-		$("#list").append "<li><img src=" + item.image + "></li>";
+		$("#list").append "<li><a href='/show/" + item.id + "'><img src=" + item.image + "></a></li>";
 	success = (data) ->
 		show item for item in data.data 
 

@@ -2,7 +2,7 @@
   $(function() {
     var error, show, success;
     show = function(item) {
-      return $("#list").append("<li><img src=" + item.image + "></li>");
+      return $("#list").append("<li><a href='/show/" + item.id + "'><img src=" + item.image + "></a></li>");
     };
     success = function(data) {
       var item, _i, _len, _ref, _results;

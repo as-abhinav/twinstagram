@@ -1,0 +1,11 @@
+#item {
+  width: 400px;}
+#item h5, span {
+  color: #FFF;}
+#item img {
+  width: 100%;
+  height: 100%;}
+#item .published_on {
+  float: right;}
+#item .postedBy {
+  float: left ;}

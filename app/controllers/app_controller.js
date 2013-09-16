@@ -13,3 +13,10 @@ action(function lists(){
 	this.title = "Lists";
 	render();
 });
+
+action(function show(){
+	this.title = "Show";
+	this.id = params.id;
+	console.log(params.id);
+	render();
+});
